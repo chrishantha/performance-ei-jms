@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<api context="/stock/v1/orders" name="StockQuoteAPI" xmlns="http://ws.apache.org/ns/synapse">
+    <resource methods="POST">
+        <inSequence>
+            <property name="OUT_ONLY" scope="default" type="STRING" value="true"/>
+            <property name="ClientApiNonBlocking" action="remove" scope="axis2"/>
+            <call>
+                <endpoint>
+                   <address uri="jms:/"/>
+                </endpoint>
+            </call>
+            <payloadFactory media-type="json">
+                <format>{"IsSuccess": "true", "Message" : "Order published successfully"}</format>
+                <args/>
+            </payloadFactory>
+            <property name="messageType" scope="axis2" type="STRING" value="application/json"/>
+            <property name="HTTP_SC" scope="axis2" type="STRING" value="200"/>
+            <respond/>
+        </inSequence>
+        <outSequence/>
+        <faultSequence>
+            <payloadFactory media-type="json">
+                <format>{"IsSuccess": "false", "Message": "Internal server error"}</format>
+                <args/>
+            </payloadFactory>
+            <property name="HTTP_SC" scope="axis2" type="STRING" value="500"/>
+            <respond/>
+        </faultSequence>
+    </resource>
+</api>

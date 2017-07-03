@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<proxy xmlns="http://ws.apache.org/ns/synapse"
+       name="StockQuoteProxy"
+       transports="http"
+       startOnLoad="true">
+   <description/>
+   <target>
+      <inSequence>
+         <property name="OUT_ONLY" value="true"/>
+         <property name="ClientApiNonBlocking" action="remove" scope="axis2"/>
+         <send>
+            <endpoint>
+               <address uri="jms:/"/>
+            </endpoint>
+         </send>
+      </inSequence>
+      <outSequence>
+         <send/>
+      </outSequence>
+   </target>
+   <publishWSDL uri="file:samples/service-bus/resources/proxy/sample_proxy_1.wsdl"/>
+</proxy>
