@@ -44,11 +44,11 @@ run_tests() {
         scp $ei_ssh_host:/mnt/wso2/wso2ei-6.1.0/repository/deployment/server/synapse-configs/default/api/*.xml results
         scp $ei_ssh_host:/mnt/wso2/wso2ei-6.1.0/conf/axis2/axis2.xml results
 
-        run_jmeter $u 120 before
+        run_jmeter $u 30 before
         ssh $activemq_ssh_host "./activemq_start.sh"
         # Sleep to avoid "connection refused" errors in 2nd run.
-        sleep 60
-        run_jmeter $u 120 after
+        sleep 30
+        run_jmeter $u 30 after
 
         scp $ei_ssh_host:/mnt/wso2/wso2ei-6.1.0/repository/logs/gc.log $PWD/results/gclogs/ei_gc_$u.log
         scp $activemq_ssh_host:/home/ubuntu/activemqgc.log $PWD/results/gclogs/activemq_gc_$u.log

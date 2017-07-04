@@ -1,5 +1,5 @@
 #!/bin/bash
-scenarios=(01 02 03 04 05)
+scenarios=(01 02 03 04 05 06)
 
 run_scenarios() {
     for n in ${scenarios[@]}
