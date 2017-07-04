@@ -13,7 +13,7 @@ fi
 
 echo "Starting ActiveMQ"
 /mnt/activemq/apache-activemq-5.14.5/bin/activemq start
-sleep 2
+sleep 10
 echo "ActiveMQ Stats"
 /mnt/activemq/apache-activemq-5.14.5/bin/activemq dstat
 echo "Purging Queue and measuring time"
